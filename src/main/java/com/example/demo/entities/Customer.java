@@ -1,9 +1,14 @@
 package com.example.demo.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.hibernate.annotations.DynamicUpdate;
 
-@Entity
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity(name = "Customer")
+@Table(name = "Customer")
+@DynamicUpdate
 public class Customer {
 
     private String name;
@@ -14,20 +19,26 @@ public class Customer {
     private String phone;
     private String email;
     @Id
+    @Column(name = "socialSecurityNumber")
     private String socialSecurityNumber;
+
+    @OneToMany(mappedBy = "customer",
+    cascade = CascadeType.ALL,
+    orphanRemoval = true)
+    private List<Rental> movies=new ArrayList<>();
 
     public Customer(){}
 
-    public Customer(String name, String address, String postalCode, String city, String country, String phone,
-                    String email, String socialSecurityNumber){
+    public Customer(String socialSecurityNumber, String address, String city, String country,
+                    String email, String name, String phone, String postalCode){
         this.name=name;
         this.address=address;
-        this.postalCode=postalCode;
+        this.postalCode = postalCode;
         this.city=city;
         this.country=country;
         this.phone=phone;
         this.email=email;
-        this.socialSecurityNumber=socialSecurityNumber;
+        this.socialSecurityNumber = socialSecurityNumber;
     }
 
     public String getName() {
@@ -94,4 +105,11 @@ public class Customer {
         this.socialSecurityNumber = socialSecurityNumber;
     }
 
+    public List<Rental> getRentedMovies() {
+        return movies;
+    }
+
+    public void setRentedMovies(List<Rental> movies) {
+        this.movies = movies;
+    }
 }

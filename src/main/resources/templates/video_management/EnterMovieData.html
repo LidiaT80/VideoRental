@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie</title>
+</head>
+<body>
+    <h1>Enter movie data:</h1>
+    <form action="addMovie" method="post" th:object="${movieDataForm}">
+        <p>Name:<input type="text" name="name" th:field="*{name}"/></p>
+        <p>Description:<input type="text" name="description" th:field="*{description}"/></p>
+        <p>Release date:<input type="text" name="releaseDate" th:field="*{releaseDate}"/></p>
+        <p>Category:<input type="text" name="category" th:field="*{category}"/></p>
+        <p>Format:<input type="text" name="movieFormat" th:field="*{movieFormat}"/></p>
+        <input type="submit" value="Enter"/>
+    </form>
+    <form action="goBack" method="post">
+        <input type="submit" value="Go back to start"/>
+    </form>
+</body>
+  </html>

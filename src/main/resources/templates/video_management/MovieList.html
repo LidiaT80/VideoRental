@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies</title>
+</head>
+<body>
+    <div th:each="movie:${movies}">
+        <p th:text="${movie.movieId}+', '+${movie.name}+', '+${movie.description}+', '+${movie.releaseDate}+
+            ', '+${movie.category}+', '+${movie.movieFormat}+', '+${movie.available}"></p>
+    </div>
+    <form action="goBack" method="post">
+        <input type="submit" value="Go back to start"/>
+    </form>
+
+</body>
+</html>

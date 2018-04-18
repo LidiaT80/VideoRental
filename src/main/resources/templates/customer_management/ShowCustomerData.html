@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>CustomerData</title>
+</head>
+<body>
+
+        <p th:text="'Name: '+${customer.name}"></p>
+        <p th:text="'Address: '+${customer.address}"></p>
+        <p th:text="'Postal code: '+${customer.postalCode}"></p>
+        <p th:text="'City: '+${customer.city}"></p>
+        <p th:text="'Country: '+${customer.country}"></p>
+        <p th:text="'Email: '+${customer.email}"></p>
+        <p th:text="'Phone: '+${customer.phone}"></p>
+        <p th:text="'Social security number: '+${customer.socialSecurityNumber}"></p>
+
+        <form action="goBack" method="post">
+            <input type="submit" value="Go back to start"/>
+        </form>
+
+
+</body>
+</html>

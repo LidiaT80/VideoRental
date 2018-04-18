@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>EnterCustomerData</title>
+</head>
+<body>
+    <form action="addCustomer" method="post" th:object="${customerDataForm}">
+        <p>Name<input type="text" name="name" th:field="*{name}"/> </p>
+        <p>Address<input type="text" name="address" th:field="*{address}"/></p>
+        <p>Postal code<input type="text" name="postalCode" th:field="*{postalCode}"/></p>
+        <p>City<input type="text" name="city" th:field="*{city}"/> </p>
+        <p>Country<input type="text" name="country" th:field="*{country}"/></p>
+        <p>Phone<input type="text" name="phone" th:field="*{phone}"/></p>
+        <p>Email<input type="text" name="email" th:field="*{email}"/> </p>
+        <p>Social security number<input type="text" name="socialSecurityNumber" th:field="*{socialSecurityNumber}"/></p>
+        <input type="submit" value="Enter"/>
+    </form>
+
+    <form action="goBack" method="post">
+        <input type="submit" value="Go back to start"/>
+    </form>
+
+</body>
+</html>
