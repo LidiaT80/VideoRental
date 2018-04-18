@@ -24,7 +24,7 @@ public class Rental {
 
     public Rental(){}
 
-    public Rental(Movie movie, Customer customer){
+    public Rental(Movie movie, Customer customer, RentalId rentalId){
         this.movie=movie;
         this.customer=customer;
         this.rentalId =new RentalId(movie.getMovieId(), customer.getSocialSecurityNumber(), rentalId.getRentalDate());

@@ -16,11 +16,11 @@ public class RentalId implements Serializable{
     private String socialSecurityNumber;
 
     @Column(name = "rentalDate")
-    private Date rentalDate;
+    private java.util.Date rentalDate;
 
     public RentalId() {}
 
-    public RentalId(Long movieId, String socialSecurityNumber, Date rentalDate) {
+    public RentalId(Long movieId, String socialSecurityNumber, java.util.Date rentalDate) {
         this.movieId=movieId;
         this.socialSecurityNumber=socialSecurityNumber;
         this.rentalDate=rentalDate;
@@ -42,11 +42,11 @@ public class RentalId implements Serializable{
         this.socialSecurityNumber = socialSecurityNumber;
     }
 
-    public Date getRentalDate() {
+    public java.util.Date getRentalDate() {
         return rentalDate;
     }
 
-    public void setRentalDate(Date rentalDate) {
+    public void setRentalDate(java.util.Date rentalDate) {
         this.rentalDate = rentalDate;
     }
 
