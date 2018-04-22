@@ -1,22 +1,27 @@
 package com.example.demo.formModels;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class MovieDataForm {
 
     @NotNull
+    @NotEmpty
     @Size(min = 1, max = 30)
     private String name;
     @NotNull
+    @NotEmpty
     @Size(min = 5, max = 250)
     private String description;
-    @NotNull
+
     private String releaseDate;
     @NotNull
+    @NotEmpty
     @Size(min = 3, max = 15)
     private String category;
     @NotNull
+    @NotEmpty
     @Size(min = 3, max = 15)
     private String movieFormat;
 

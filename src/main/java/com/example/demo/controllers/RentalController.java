@@ -52,7 +52,7 @@ public class RentalController {
     public ModelAndView rent(Model model, @ModelAttribute @Valid RentalIdForm rentalIdForm, BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
-            model.addAttribute("rentalIdForm",new RentalIdForm());
+            model.addAttribute("rentalIdForm",rentalIdForm);
             return new ModelAndView("rental_management/RentAMovie").addObject("rentalIdForm");
         }
         RentalId rentalId=new RentalId();

@@ -8,10 +8,15 @@
     <h1>Enter movie data:</h1>
     <form action="addMovie" method="post" th:object="${movieDataForm}">
         <p>Name:<input type="text" name="name" th:field="*{name}"/></p>
+        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
         <p>Description:<input type="text" name="description" th:field="*{description}"/></p>
+        <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
         <p>Release date:<input type="text" name="releaseDate" th:field="*{releaseDate}"/></p>
+        <p th:if="${#fields.hasErrors('releaseDate')}" th:errors="*{releaseDate}"></p>
         <p>Category:<input type="text" name="category" th:field="*{category}"/></p>
+        <p th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></p>
         <p>Format:<input type="text" name="movieFormat" th:field="*{movieFormat}"/></p>
+        <p th:if="${#fields.hasErrors('movieFormat')}" th:errors="*{movieFormat}"></p>
         <input type="submit" value="Enter"/>
     </form>
     <form action="goBack" method="post">

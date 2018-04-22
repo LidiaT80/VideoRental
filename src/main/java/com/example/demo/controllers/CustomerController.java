@@ -37,7 +37,7 @@ public class CustomerController {
     public ModelAndView addCustomer(@ModelAttribute @Valid CustomerDataForm customerDataForm, BindingResult bindingResult, Model model) {
 
         if(bindingResult.hasErrors()){
-            model.addAttribute("customerDataForm", new CustomerDataForm());
+            model.addAttribute("customerDataForm", customerDataForm);
             return new ModelAndView("customer_management/EnterCustomerData").addObject("customerDataForm");
         }
 

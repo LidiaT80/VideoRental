@@ -38,7 +38,7 @@ public class MovieController {
     public ModelAndView addMovie(@ModelAttribute @Valid MovieDataForm movieDataForm, BindingResult bindingResult, Model model){
 
         if(bindingResult.hasErrors()){
-            model.addAttribute("movieDataForm", new MovieDataForm());
+            model.addAttribute("movieDataForm", movieDataForm);
             return new ModelAndView("video_management/EnterMovieData").addObject("movieDataForm");
         }
         Movie movie=new Movie();

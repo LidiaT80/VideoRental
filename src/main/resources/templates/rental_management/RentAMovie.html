@@ -9,10 +9,13 @@
     <form action="rent" method="post" th:object="${rentalIdForm}">
         <p>Enter customers social security number:</p>
         <input type="text" name="socialSecurityNumber" th:field="*{socialSecurityNumber}"/>
+        <p th:if="${#fields.hasErrors('socialSecurityNumber')}" th:errors="*{socialSecurityNumber}"></p>
         <p>Enter movieId</p>
         <input type="text" name="movieId" th:field="*{movieId}"/>
+        <p th:if="${#fields.hasErrors('movieId')}" th:errors="*{movieId}"></p>
         <p>Enter date:</p>
         <input type="text" name="rentalDate" th:field="*{rentalDate}"/>
+        <p th:if="${#fields.hasErrors('rentalDate')}" th:errors="*{rentalDate}"></p>
         <input type="submit" value="Enter"/>
     </form>
 
