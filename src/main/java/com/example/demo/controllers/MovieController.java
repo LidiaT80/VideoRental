@@ -5,11 +5,14 @@ import com.example.demo.formModels.MovieDataForm;
 import com.example.demo.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 import java.lang.Long;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,7 +35,12 @@ public class MovieController {
     }
 
     @RequestMapping("addMovie")
-    public ModelAndView addMovie(@ModelAttribute MovieDataForm movieDataForm){
+    public ModelAndView addMovie(@ModelAttribute @Valid MovieDataForm movieDataForm, BindingResult bindingResult, Model model){
+
+        if(bindingResult.hasErrors()){
+            model.addAttribute("movieDataForm", new MovieDataForm());
+            return new ModelAndView("video_management/EnterMovieData").addObject("movieDataForm");
+        }
         Movie movie=new Movie();
         movie.setName(movieDataForm.getName());
         movie.setDescription(movieDataForm.getDescription());

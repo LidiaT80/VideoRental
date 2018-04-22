@@ -1,14 +1,34 @@
 package com.example.demo.formModels;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class CustomerDataForm {
 
+    @NotNull
+    @Size(min = 3, max = 30)
     private String name;
+    @NotNull
+    @Size(min = 3, max = 30)
     private String address;
+    @NotNull
+    @Size(min = 5,max = 6)
     private String postalCode;
+    @NotNull
+    @Size(min = 2, max = 30)
     private String city;
+    @NotNull
+    @Size(min = 2, max = 30)
     private String country;
+    @NotNull
+    @Size(min = 9, max = 12)
     private String phone;
+    @NotNull
+    @Email
     private String email;
+    @NotNull
+    @Size(min = 10, max = 13)
     private String socialSecurityNumber;
 
 

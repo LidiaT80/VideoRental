@@ -17,10 +17,12 @@ import org.hibernate.service.internal.SessionFactoryServiceRegistryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.provider.HibernateUtils;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +34,12 @@ public class CustomerController {
     private CustomerRepository customerRepository;
 
     @RequestMapping("addCustomer")
-    public ModelAndView addCustomer( @ModelAttribute CustomerDataForm customerDataForm ) {
+    public ModelAndView addCustomer(@ModelAttribute @Valid CustomerDataForm customerDataForm, BindingResult bindingResult, Model model) {
+
+        if(bindingResult.hasErrors()){
+            model.addAttribute("customerDataForm", new CustomerDataForm());
+            return new ModelAndView("customer_management/EnterCustomerData").addObject("customerDataForm");
+        }
 
         Customer customer=new Customer(customerDataForm.getSocialSecurityNumber(), customerDataForm.getAddress(), customerDataForm.getCity(),
                 customerDataForm.getCountry(), customerDataForm.getEmail(),customerDataForm.getName(), customerDataForm.getPhone(), customerDataForm.getPostalCode() );

@@ -11,12 +11,14 @@ import com.example.demo.repositories.MovieRepository;
 import com.example.demo.repositories.RentalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -47,8 +49,16 @@ public class RentalController {
     }
 
     @RequestMapping("rent")
-    public ModelAndView rent(Model model, @ModelAttribute RentalIdForm rentalIdForm){
+    public ModelAndView rent(Model model, @ModelAttribute @Valid RentalIdForm rentalIdForm, BindingResult bindingResult){
+
+        if(bindingResult.hasErrors()){
+            model.addAttribute("rentalIdForm",new RentalIdForm());
+            return new ModelAndView("rental_management/RentAMovie").addObject("rentalIdForm");
+        }
         RentalId rentalId=new RentalId();
+
+        rentalId.setSocialSecurityNumber(rentalIdForm.getSocialSecurityNumber());
+        rentalId.setRentalDate(rentalIdForm.getRentalDate());
 
         Movie movie=movieRepository.findById(rentalIdForm.getMovieId()).get();
         if(movie.getAvailable())
@@ -58,10 +68,20 @@ public class RentalController {
             return new ModelAndView("rental_management/RentAMovie").addObject("rentalIdForm")
                     .addObject("message", "Movie not available. Please choose another one.");
         }
+        List<Rental> rentalList=(List<Rental>) rentalRepository.findAll();
+        List<Rental> custRentals=rentalList.stream()
+                .filter(rental -> rental.getRentalId().getSocialSecurityNumber().equals(rentalIdForm.getSocialSecurityNumber()))
+                .collect(Collectors.toList());
+        List<String> custMovieNames=new ArrayList<>();
+        custRentals.stream()
+                .forEach(rental -> custMovieNames.add(movieRepository.findById(rental.getRentalId().getMovieId()).get().getName()));
 
-        rentalId.setSocialSecurityNumber(rentalIdForm.getSocialSecurityNumber());
-        rentalId.setRentalDate(rentalIdForm.getRentalDate());
-
+        if(custMovieNames.contains(movie.getName()))
+        {
+            model.addAttribute("rentalIdForm",new RentalIdForm());
+            return new ModelAndView("rental_management/RentAMovie").addObject("rentalIdForm")
+                    .addObject("message", "You have already rented a copy of this movie.");
+        }
 
         movie.setAvailable(false);
         Customer customer=customerRepository.findById(rentalIdForm.getSocialSecurityNumber()).get();
