@@ -95,11 +95,37 @@ public class CustomerController {
     }
 
     @RequestMapping("showList")
-    public ModelAndView showList(){
-        Iterable<Customer> customers=customerRepository.findAll();
-        return new ModelAndView("customer_management/CustomerList").addObject("customers", customers);
+    public ModelAndView showList(@RequestParam (defaultValue = "1") int page){
+
+        int pageSize=5;
+        int last=page*pageSize;
+        List<Customer> customerList=(List<Customer>) customerRepository.findAll();
+        int numberOfPages= (int)Math.ceil((double) customerList.size()/pageSize);
+        if(customerList.size()>=last)
+            last=page*pageSize;
+        else
+            last=customerList.size();
+        List<Customer> customers=customerList.subList((page-1)*pageSize,last);
+
+        ModelAndView listModel=new ModelAndView("customer_management/CustomerList").addObject("page",page);
+
+        listModel.addObject("customers",customers);
+
+        if(page>1) {
+            listModel.addObject("previous", "showList?page=" + (page - 1));
+            listModel.addObject("text1", "previous");
+        }
+
+        if(page<numberOfPages) {
+            listModel.addObject("next", "showList?page=" + (page + 1));
+            listModel.addObject("text2", "next");
+        }
+
+        return listModel;
 
     }
+
+
 
 
 }

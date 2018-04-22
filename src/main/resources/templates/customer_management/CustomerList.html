@@ -5,6 +5,17 @@
     <title>Title</title>
 </head>
 <body>
+    <h1>Customers</h1>
+    <tr>
+        <td>Social security number</td>
+        <td>Name</td>
+        <td>Address</td>
+        <td>Postal code</td>
+        <td>City</td>
+        <td>Country</td>
+        <td>Phone number</td>
+        <td>Email</td>
+    </tr><br/>
     <th:block th:each="customer:${customers}">
         <tr>
             <td th:text="${customer.socialSecurityNumber}"></td>
@@ -17,6 +28,11 @@
             <td th:text="${customer.email}"></td>
         </tr><br/>
     </th:block>
+
+    <a th:text="${text1}" th:href="${previous}"></a>
+    <span th:text="' Page '+${page}+' '">page</span>
+    <a th:text="${text2}" th:href="${next}"></a>
+
     <form action="goBack" method="post">
         <input type="submit" value="Go back to start"/>
     </form>

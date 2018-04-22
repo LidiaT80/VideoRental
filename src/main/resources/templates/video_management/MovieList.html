@@ -5,6 +5,16 @@
     <title>Movies</title>
 </head>
 <body>
+    <h1 th:text="${title}"></h1>
+    <tr>
+        <td>Movie Id</td>
+        <td>Title</td>
+        <td>Description</td>
+        <td>Release date</td>
+        <td>Category</td>
+        <td>Format</td>
+        <td>Available</td>
+    </tr><br/>
     <th:block th:each="movie:${movies}">
         <tr>
             <td th:text="${movie.movieId}"></td>
@@ -16,6 +26,11 @@
             <td th:text="${movie.available}"></td>
         </tr><br/>
     </th:block>
+
+    <a th:text="${text1}" th:href="${previous}"></a>
+    <span th:text="' Page '+${page}+' '">page</span>
+    <a th:text="${text2}" th:href="${next}"></a>
+
     <form action="goBack" method="post">
         <input type="submit" value="Go back to start"/>
     </form>

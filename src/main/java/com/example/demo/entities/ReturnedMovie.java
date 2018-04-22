@@ -22,11 +22,11 @@ public class ReturnedMovie {
     private Customer customer;
 
     @Column(name = "returnDate")
-    private Date returnDate;
+    private java.util.Date returnDate;
 
     public ReturnedMovie(){}
 
-    public ReturnedMovie(Movie movie, Customer customer, Date returnDate){
+    public ReturnedMovie(Movie movie, Customer customer, java.util.Date returnDate){
         this.movie=movie;
         this.customer=customer;
         this.returnId =new ReturnId(movie.getMovieId(), customer.getSocialSecurityNumber());
@@ -57,11 +57,11 @@ public class ReturnedMovie {
         this.customer = customer;
     }
 
-    public Date getReturnDate() {
+    public java.util.Date getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(Date returnDate) {
+    public void setReturnDate(java.util.Date returnDate) {
         this.returnDate = returnDate;
     }
 

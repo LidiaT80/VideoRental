@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import java.lang.Long;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 public class MovieController {
 
@@ -55,11 +58,67 @@ public class MovieController {
     }
 
     @RequestMapping("showMovieList")
-    public ModelAndView showMovieList(){
-        Iterable<Movie> movies=movieRepository.findAll();
-        return new ModelAndView("video_management/MovieList").addObject("movies", movies);
+    public ModelAndView showMovieList(@RequestParam (defaultValue = "1") int page){
+
+        List<Movie> movieList=(List<Movie>) movieRepository.findAll();
+
+        return pagedView(page, movieList, "All movies","showMovieList" );
+
     }
 
 
+    @RequestMapping("availableMovies")
+    public ModelAndView availableMovies(@RequestParam (defaultValue = "1") int page){
+        List<Movie> movies=(List<Movie>) movieRepository.findAll();
+        List<Movie> movieList=movies.stream()
+                .filter(movie -> movie.getAvailable())
+                .collect(Collectors.toList());
 
+        return pagedView(page, movieList, "Available movies", "availableMovies");
+    }
+
+
+    @RequestMapping("findByName")
+    public ModelAndView findByName(@RequestParam String movieName, @RequestParam (defaultValue = "1") int page){
+        List<Movie> movies=(List<Movie>) movieRepository.findAll();
+        List<Movie> movieList=movies.stream()
+                .filter(movie -> movie.getName().equalsIgnoreCase(movieName))
+                .collect(Collectors.toList());
+       return pagedView(page, movieList, "Search movies by name", "findByName");
+    }
+
+    @RequestMapping("findByCategory")
+    public ModelAndView findByCategory(@RequestParam String movieCategory, @RequestParam (defaultValue = "1") int page){
+        List<Movie> movies=(List<Movie>) movieRepository.findAll();
+        List<Movie> movieList=movies.stream()
+                .filter(movie -> movie.getCategory().equalsIgnoreCase(movieCategory))
+                .collect(Collectors.toList());
+        return pagedView(page, movieList, "Search movies by category", "findByCategory");
+    }
+
+    public ModelAndView pagedView(int page, List<Movie> movieList, String title, String listCategory){
+
+        int pageSize=5;
+        int last=page*pageSize;
+        int numberOfPages= (int)Math.ceil((double) movieList.size()/pageSize);
+
+        if(movieList.size()>=last)
+            last=page*pageSize;
+        else
+            last=movieList.size();
+        List<Movie> movies=movieList.subList((page-1)*pageSize,last);
+
+        ModelAndView listModel=new ModelAndView("video_management/MovieList").addObject("page",page);
+        listModel.addObject("movies",movies).addObject("title", title);
+
+        if(page>1) {
+            listModel.addObject("previous", listCategory+"?page=" + (page - 1));
+            listModel.addObject("text1", "previous");
+        }
+        if(page<numberOfPages) {
+            listModel.addObject("next", listCategory+"?page=" + (page + 1));
+            listModel.addObject("text2", "next");
+        }
+        return listModel;
+    }
 }

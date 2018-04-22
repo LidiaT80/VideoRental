@@ -5,6 +5,7 @@ import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Embeddable
 public class RentalId implements Serializable{
@@ -48,6 +49,21 @@ public class RentalId implements Serializable{
 
     public void setRentalDate(java.util.Date rentalDate) {
         this.rentalDate = rentalDate;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getMovieId(), getSocialSecurityNumber(), getRentalDate());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof RentalId)) return false;
+        RentalId that = (RentalId) o;
+        return Objects.equals(getMovieId(), that.getMovieId()) &&
+                Objects.equals(getSocialSecurityNumber(), that.getSocialSecurityNumber()) &&
+                Objects.equals(getRentalDate(), that.getRentalDate());
     }
 
 

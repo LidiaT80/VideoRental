@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+    <p th:text="${message}"></p>
     <form action="rent" method="post" th:object="${rentalIdForm}">
         <p>Enter customers social security number:</p>
         <input type="text" name="socialSecurityNumber" th:field="*{socialSecurityNumber}"/>

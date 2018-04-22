@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Rental</title>
+</head>
+<body>
+    <h1 th:text="${title}"></h1>
+    <tr>
+        <th>Rental date</th>
+        <th>MovieId</th>
+        <th>Movie name</th>
+        <th>Customer name</th>
+        <th>Customer phone</th>
+    </tr><br/>
+    <th:block th:each="rentalObject:${rentals}">
+        <tr>
+            <td th:text="${rentalObject.rentalDate}"></td>
+            <td th:text="${rentalObject.movieId}"></td>
+            <td th:text="${rentalObject.movieName}"></td>
+            <td th:text="${rentalObject.customerName}"></td>
+            <td th:text="${rentalObject.customerPhone}"></td>
+        </tr><br/>
+    </th:block>
+
+    <a th:text="${text1}" th:href="${previous}"></a>
+    <span th:text="' Page '+${page}+' '">page</span>
+    <a th:text="${text2}" th:href="${next}"></a>
+
+    <form action="goBack" method="post">
+        <input type="submit" value="Go back to start"/>
+    </form>
+
+
+</body>
+</html>

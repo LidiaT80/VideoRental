@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Return</title>
+</head>
+<body>
+    <h1>Return movies</h1>
+
+    <form action="findRentedMovies" method="post">
+        <p>Enter customers social security number:</p>
+        <input type="text" name="socialSecurityNumber"/>
+        <p>Date:</p>
+        <input type="text" name="returnDate"/>
+        <input type="submit" value="Enter"/>
+    </form>
+
+    <th:block th:each="movie:${movies}">
+        <tr>
+            <td th:text="${movie.movieId}"></td>
+            <td th:text="${movie.name}"></td>
+        </tr><br/>
+    </th:block>
+    <p th:text="${message}"></p>
+
+    <form action="goBack" method="post">
+        <input type="submit" value="Go back to start"/>
+    </form>
+
+</body>
+</html>

@@ -3,6 +3,7 @@ package com.example.demo.entities.compositeKeys;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Embeddable
 public class ReturnId implements Serializable{
@@ -34,5 +35,19 @@ public class ReturnId implements Serializable{
 
     public void setSocialSecurityNumber(String socialSecurityNumber) {
         this.socialSecurityNumber = socialSecurityNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getMovieId(), getSocialSecurityNumber());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ReturnId)) return false;
+        ReturnId that = (ReturnId) o;
+        return Objects.equals(getMovieId(), that.getMovieId()) &&
+                Objects.equals(getSocialSecurityNumber(), that.getSocialSecurityNumber());
     }
 }
