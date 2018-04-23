@@ -3,6 +3,7 @@ package com.example.demo.controllers;
 import com.example.demo.entities.Movie;
 import com.example.demo.formModels.MovieDataForm;
 import com.example.demo.repositories.MovieRepository;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -83,6 +84,13 @@ public class MovieController {
                 .collect(Collectors.toList());
 
         return pagedView(page, movieList, "Available movies", "availableMovies", session);
+    }
+
+    @RequestMapping("findMovie")
+    public ModelAndView findMovie(HttpSession session){
+        return new ModelAndView("video_management/FindMovie")
+                .addObject("username", session.getAttribute("user"));
+
     }
 
 

@@ -63,15 +63,18 @@
         </div>
     </nav>
 </header>
-
-
-    <p th:text="'Customer: '+${rentalId.socialSecurityNumber}"></p>
-    <p th:text="'Movie: '+${rentalId.movieId}"></p>
-    <p th:text="'Rental date: '+${rentalId.rentalDate}"></p>
-
-    <form action="renting" method="post">
-        <input type="submit" value="Rent another movie"/>
-    </form>
+<p>Search by name</p>
+<form action="findByName" method="post">
+    <p>Enter name:</p>
+    <input type="text" name="movieName"/>
+    <input type="submit" value="Search"/>
+</form>
+<p>Search by category</p>
+<form action="findByCategory" method="post">
+    <p>Enter category:</p>
+    <input type="text" name="movieCategory"/>
+    <input type="submit" value="Search"/>
+</form>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -84,5 +87,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
+
 </body>
 </html>
