@@ -23,9 +23,12 @@ public class Customer {
     private String socialSecurityNumber;
 
     @OneToMany(mappedBy = "customer",
-    cascade = CascadeType.ALL,
-    orphanRemoval = true)
-    private List<Rental> movies=new ArrayList<>();
+    cascade = CascadeType.ALL)
+    private List<Rental> rentedMovies =new ArrayList<>();
+
+    @OneToMany(mappedBy = "customer",
+            cascade = CascadeType.ALL)
+    private List<ReturnedMovie> returnedMovies=new ArrayList<>();
 
     public Customer(){}
 
@@ -106,10 +109,18 @@ public class Customer {
     }
 
     public List<Rental> getRentedMovies() {
-        return movies;
+        return rentedMovies;
     }
 
     public void setRentedMovies(List<Rental> movies) {
-        this.movies = movies;
+        this.rentedMovies = movies;
+    }
+
+    public List<ReturnedMovie> getReturnedMovies() {
+        return returnedMovies;
+    }
+
+    public void setReturnedMovies(List<ReturnedMovie> returnedMovies) {
+        this.returnedMovies = returnedMovies;
     }
 }

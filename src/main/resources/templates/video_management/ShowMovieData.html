@@ -1,11 +1,71 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>MovieData</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
 </head>
 <body>
-    <h3 th:text="'Logged in as ' + ${username} "></h3>
+<h3 th:text="'Logged in as ' + ${username} "></h3>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">True Blood</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+                aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Customers
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" th:href="@{/showList}">Show All</a>
+                        <a class="dropdown-item" th:href="@{/availableMovies}">Show Available Movies</a>
+                        <a class="dropdown-item" th:href="@{/customerData}">Find Customer</a>
+                        <a class="dropdown-item" th:href="@{/customerData}">Add Customer</a>
+                        <a class="dropdown-item" th:href="@{/editData}">Edit Customer</a>
+                    </div>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Movies
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" th:href="@{/showMovieList}">Show All</a>
+                        <a class="dropdown-item" th:href="@{/findByName}">Find Movies by name</a>
+                        <a class="dropdown-item" th:href="@{/findByCategory}">Find Movies by category</a>
+                        <a class="dropdown-item" th:href="@{/movieData}">Add Movie</a>
+                        <a class="dropdown-item" th:href="@{/deleteMovie}">Delete Movie</a>
+
+                    </div>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Renting options
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" th:href="@{/movie/rent}">Rent</a>
+                        <a class="dropdown-item" th:href="@{/movie/return}">Return</a>
+                    </div>
+            </ul>
+
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+</header>
+
+
     <p th:text="'MovieId: '+${movie.movieId}"></p>
     <p th:text="'Name: '+${movie.name}"></p>
     <p th:text="'Description: '+${movie.description}"></p>
@@ -14,9 +74,18 @@
     <p th:text="'Format: '+${movie.movieFormat}"></p>
     <p th:text="'Available: '+${movie.available}"></p>
 
-    <form action="goBack" method="post">
-        <input type="submit" value="Go back to start"/>
-    </form>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>

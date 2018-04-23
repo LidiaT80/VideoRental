@@ -3,9 +3,6 @@ package com.example.demo.entities;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,9 +24,12 @@ public class Movie {
     private boolean available;
 
     @OneToMany(mappedBy = "movie",
-    cascade = CascadeType.ALL,
-    orphanRemoval = true)
-    private List<Rental> customers= new ArrayList<>();
+    cascade = CascadeType.ALL)
+    private List<Rental> customersRentals = new ArrayList<>();
+
+    @OneToMany(mappedBy = "movie",
+            cascade = CascadeType.ALL)
+    private List<ReturnedMovie> customersMovies= new ArrayList<>();
 
 
 
@@ -93,11 +93,19 @@ public class Movie {
         this.available=available;
     }
 
-    public List<Rental> getCustomers() {
-        return customers;
+    public List<Rental> getCustomersRentals() {
+        return customersRentals;
     }
 
-    public void setCustomers(List<Rental> customers) {
-        this.customers = customers;
+    public void setCustomersRentals(List<Rental> customers) {
+        this.customersRentals = customers;
+    }
+
+    public List<ReturnedMovie> getCustomersMovies() {
+        return customersMovies;
+    }
+
+    public void setCustomersMovies(List<ReturnedMovie> customersMovies) {
+        this.customersMovies = customersMovies;
     }
 }

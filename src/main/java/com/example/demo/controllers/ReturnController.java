@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -42,8 +43,7 @@ public class ReturnController {
     }
 
     @RequestMapping("findRentedMovies")
-    public ModelAndView findRentedMovies( @RequestParam String socialSecurityNumber, @RequestParam Date returnDate,
-                                          HttpSession session){
+    public ModelAndView findRentedMovies( @RequestParam String socialSecurityNumber, HttpSession session){
         ReturnId returnId=new ReturnId();
         ReturnedMovie returnedMovie=new ReturnedMovie();
         Customer customer=customerRepository.findById(socialSecurityNumber).get();
@@ -59,7 +59,7 @@ public class ReturnController {
                                    returnId.setSocialSecurityNumber(socialSecurityNumber);
                                    returnedMovie.setMovie(movie);
                                    returnedMovie.setCustomer(customer);
-                                   returnedMovie.setReturnDate(returnDate);
+                                   returnedMovie.setReturnDate(new Date());
                                    returnedMovie.setReturnId(returnId);
                                    returnRepository.save(returnedMovie); });
 
@@ -70,6 +70,7 @@ public class ReturnController {
 
         return new ModelAndView("rental_management/ReturnMovies")
                 .addObject("movies",custMovies )
+                .addObject("date", new SimpleDateFormat("yyyy/mm/dd").format(returnedMovie.getReturnDate()))
                 .addObject("message", "Movies are returned!")
                 .addObject("username", session.getAttribute("user"));
     }

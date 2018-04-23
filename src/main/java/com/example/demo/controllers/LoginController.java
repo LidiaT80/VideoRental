@@ -12,7 +12,6 @@ public class LoginController {
 
     @RequestMapping("home")
     public ModelAndView loginPage(){
-
         return new ModelAndView("login_management/LogInPage");
     }
 
@@ -32,11 +31,5 @@ public class LoginController {
     public ModelAndView logOut(HttpSession session){
         session.invalidate();
         return new ModelAndView("login_management/LogInPage");
-    }
-
-    @RequestMapping("goBack")
-    public ModelAndView goBack(HttpSession session){
-        return new ModelAndView("login_management/StartPage")
-                .addObject("username", session.getAttribute("user"));
     }
 }

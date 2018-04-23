@@ -63,12 +63,6 @@ public class CustomerController {
                 .addObject("username", session.getAttribute("user"));
     }
 
-    @RequestMapping("customersPage")
-    public ModelAndView customersPage(HttpSession session){
-        return new ModelAndView("customer_management/CustomersPage")
-                .addObject("username", session.getAttribute("user"));
-    }
-
     @RequestMapping("editData")
     public ModelAndView editData(HttpSession session){
 
@@ -147,8 +141,5 @@ public class CustomerController {
         return listModel;
 
     }
-
-
-
 
 }

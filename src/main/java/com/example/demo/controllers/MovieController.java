@@ -27,11 +27,6 @@ public class MovieController {
 
     ModelMapper mapper=new ModelMapper();
 
-    @RequestMapping("moviePage")
-    public ModelAndView moviePage(HttpSession session){
-        return new ModelAndView("video_management/MoviePage").addObject("username", session.getAttribute("user"));
-    }
-
     @RequestMapping("movieData")
     public ModelAndView movieData(Model model, HttpSession session){
         model.addAttribute("movieDataForm", new MovieDataForm());
@@ -62,11 +57,12 @@ public class MovieController {
     }
 
     @RequestMapping("deleteById")
-    public ModelAndView deleteById(@RequestParam("movieId") Long id, HttpSession session){
+    public ModelAndView deleteById(@RequestParam (defaultValue = "1") int page, @RequestParam("movieId") Long id, HttpSession session){
 
         movieRepository.deleteById(id);
-        return new ModelAndView("video_management/MoviePage").addObject("username", session.getAttribute("user"));
+        List<Movie> movieList=(List<Movie>) movieRepository.findAll();
 
+        return pagedView(page, movieList, "All movies","showMovieList", session );
     }
 
     @RequestMapping("showMovieList")
