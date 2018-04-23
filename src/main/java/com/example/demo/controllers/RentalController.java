@@ -21,8 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -141,6 +139,19 @@ public class RentalController {
         }
 
         return pagedViewRental(page, overdues, "Overdue movies", "overdueMovies", session);
+    }
+
+    @RequestMapping("customersCurrentMovies")
+    public ModelAndView customersCurrentMovies(@RequestParam String socialSecurityNumber, @RequestParam(defaultValue = "1") int page,
+                                               HttpSession session){
+        MovieController movieController=new MovieController();
+
+        List<Rental> rentals=(List<Rental>) rentalRepository.findAll();
+        List<Movie> currentMovies=new ArrayList<>();
+        rentals.stream()
+                .filter(rental -> rental.getRentalId().getSocialSecurityNumber().equals(socialSecurityNumber))
+                .forEach(rental ->currentMovies.add(movieRepository.findById(rental.getRentalId().getMovieId()).get()) );
+        return movieController.pagedView(page, currentMovies, "Customers current movies", "customersCurrentMovies", session);
     }
 
     public ModelAndView pagedViewRental(int page, List<RentalObject> rentalObjects, String title,
