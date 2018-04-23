@@ -10,9 +10,9 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class LoginController {
 
-    @RequestMapping("videorental")
-    public ModelAndView loginPage(HttpSession session){
-        session.invalidate();
+    @RequestMapping("home")
+    public ModelAndView loginPage(){
+
         return new ModelAndView("login_management/LogInPage");
     }
 
@@ -22,14 +22,21 @@ public class LoginController {
         String password=request.getParameter("password");
         if(username!=null)
             session.setAttribute("user",username);
-        if(session.getAttribute("user")!=null && password.equals("123"))
+        if((session.getAttribute("user").equals("user1") && password.equals("123")) ||
+                (session.getAttribute("user").equals("user2") && password.equals("456")))
             return new ModelAndView("login_management/StartPage").addObject("username", session.getAttribute("user"));
         else
             return new ModelAndView("login_management/LogInPage");
     }
+    @RequestMapping("logOut")
+    public ModelAndView logOut(HttpSession session){
+        session.invalidate();
+        return new ModelAndView("login_management/LogInPage");
+    }
 
     @RequestMapping("goBack")
-    public ModelAndView goBack(){
-        return new ModelAndView(("login_management/StartPage"));
+    public ModelAndView goBack(HttpSession session){
+        return new ModelAndView("login_management/StartPage")
+                .addObject("username", session.getAttribute("user"));
     }
 }

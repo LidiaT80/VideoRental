@@ -1,16 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Edit</title>
+    <link rel="stylesheet" href="../../Style.css" type="text/css">
 </head>
 <body>
+    <h3 th:text="'Logged in as ' + ${username} "></h3>
     <h1>Edit</h1>
     <form action="editCustomer" method="post">
         <p>Enter customers social security number:</p>
-        <p><input type="text" name="socialSecurityNumber"/></p>
-        <p><input type="text" name="property"/>(name, address, postalCode, city, country, phone, email)</p>
-        <p><input type="text" name="newValue"/>Enter new value.</p>
+        <input type="text" name="socialSecurityNumber"/>
+        <p>Type the name of a property: (name, address, postalCode, city, country, phone, email)</p>
+        <input type="text" name="property"/>
+        <p>Enter new value:</p>
+        <input type="text" name="newValue"/><br/>
         <input type="submit" value="Enter"/>
     </form>
     <form action="goBack" method="post">

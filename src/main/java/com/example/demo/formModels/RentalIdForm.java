@@ -11,7 +11,7 @@ public class RentalIdForm {
     @NotEmpty
     @Size(min = 10, max = 13)
     private String socialSecurityNumber;
-    
+
     private Long movieId;
 
     private Date rentalDate;

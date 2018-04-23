@@ -3,24 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>EnterCustomerData</title>
+    <link rel="stylesheet" href="../../Style.css" type="text/css">
 </head>
 <body>
+    <h3 th:text="'Logged in as ' + ${username} "></h3>
     <form action="addCustomer" method="post" th:object="${customerDataForm}">
-        <p>Name<input type="text" name="name" th:field="*{name}"/> </p>
+        <p>Name</p>
+        <input type="text" name="name" th:field="*{name}"/>
         <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
-        <p>Address<input type="text" name="address" th:field="*{address}"/></p>
+        <p>Address</p>
+        <input type="text" name="address" th:field="*{address}"/>
         <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
-        <p>Postal code<input type="text" name="postalCode" th:field="*{postalCode}"/></p>
+        <p>Postal code</p>
+        <input type="text" name="postalCode" th:field="*{postalCode}"/>
         <p th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></p>
-        <p>City<input type="text" name="city" th:field="*{city}"/> </p>
+        <p>City</p>
+        <input type="text" name="city" th:field="*{city}"/>
         <p th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></p>
-        <p>Country<input type="text" name="country" th:field="*{country}"/></p>
+        <p>Country</p>
+        <input type="text" name="country" th:field="*{country}"/>
         <p th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></p>
-        <p>Phone<input type="text" name="phone" th:field="*{phone}"/></p>
+        <p>Phone</p>
+        <input type="text" name="phone" th:field="*{phone}"/>
         <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
-        <p>Email<input type="text" name="email" th:field="*{email}"/> </p>
+        <p>Email</p>
+        <input type="text" name="email" th:field="*{email}"/>
         <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
-        <p>Social security number<input type="text" name="socialSecurityNumber" th:field="*{socialSecurityNumber}"/></p>
+        <p>Social security number</p>
+        <input type="text" name="socialSecurityNumber" th:field="*{socialSecurityNumber}"/>
         <p th:if="${#fields.hasErrors('socialSecurityNumber')}" th:errors="*{socialSecurityNumber}"></p>
         <input type="submit" value="Enter"/>
     </form>

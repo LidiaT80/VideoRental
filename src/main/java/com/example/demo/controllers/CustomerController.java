@@ -14,6 +14,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.internal.SessionFactoryServiceRegistryImpl;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.provider.HibernateUtils;
 import org.springframework.ui.Model;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,42 +35,52 @@ public class CustomerController {
     @Autowired
     private CustomerRepository customerRepository;
 
+    ModelMapper mapper=new ModelMapper();
+
     @RequestMapping("addCustomer")
-    public ModelAndView addCustomer(@ModelAttribute @Valid CustomerDataForm customerDataForm, BindingResult bindingResult, Model model) {
+    public ModelAndView addCustomer(@ModelAttribute @Valid CustomerDataForm customerDataForm,
+                                    BindingResult bindingResult, Model model, HttpSession session) {
 
         if(bindingResult.hasErrors()){
             model.addAttribute("customerDataForm", customerDataForm);
             return new ModelAndView("customer_management/EnterCustomerData").addObject("customerDataForm");
         }
 
-        Customer customer=new Customer(customerDataForm.getSocialSecurityNumber(), customerDataForm.getAddress(), customerDataForm.getCity(),
-                customerDataForm.getCountry(), customerDataForm.getEmail(),customerDataForm.getName(), customerDataForm.getPhone(), customerDataForm.getPostalCode() );
+        Customer customer=mapper.map(customerDataForm, Customer.class);
         customerRepository.save(customer);
-        return new ModelAndView("customer_management/ShowCustomerData").addObject("customer", customer);
+        return new ModelAndView("customer_management/ShowCustomerData")
+                .addObject("customer", customer)
+                .addObject("username", session.getAttribute("user"));
 
     }
 
 
     @RequestMapping("customerData")
-    public ModelAndView customerData(Model model){
+    public ModelAndView customerData(Model model, HttpSession session){
         model.addAttribute("customerDataForm", new CustomerDataForm());
-        return new ModelAndView("customer_management/EnterCustomerData").addObject("customerDataForm");
+        return new ModelAndView("customer_management/EnterCustomerData")
+                .addObject("customerDataForm")
+                .addObject("username", session.getAttribute("user"));
     }
 
     @RequestMapping("customersPage")
-    public ModelAndView customersPage(){
-        return new ModelAndView("customer_management/CustomersPage");
+    public ModelAndView customersPage(HttpSession session){
+        return new ModelAndView("customer_management/CustomersPage")
+                .addObject("username", session.getAttribute("user"));
     }
 
     @RequestMapping("editData")
-    public ModelAndView editData(){
+    public ModelAndView editData(HttpSession session){
 
-        return new ModelAndView("customer_management/EditCustomerData");
+        return new ModelAndView("customer_management/EditCustomerData")
+                .addObject("username", session.getAttribute("user"));
     }
 
     @RequestMapping("editCustomer")
     public ModelAndView editCustomer(@RequestParam("socialSecurityNumber") String socialSecurityNumber,
-                                     @RequestParam("property") String property, @RequestParam("newValue") String newValue){
+                                     @RequestParam("property") String property,
+                                     @RequestParam("newValue") String newValue,
+                                     HttpSession session){
 
         Customer customer=customerRepository.findById(socialSecurityNumber).get();
 
@@ -98,11 +110,13 @@ public class CustomerController {
 
         customerRepository.save(customer);
 
-        return new ModelAndView("customer_management/ShowCustomerData").addObject("customer", customer);
+        return new ModelAndView("customer_management/ShowCustomerData")
+                .addObject("customer", customer)
+                .addObject("username", session.getAttribute("user"));
     }
 
     @RequestMapping("showList")
-    public ModelAndView showList(@RequestParam (defaultValue = "1") int page){
+    public ModelAndView showList(@RequestParam (defaultValue = "1") int page, HttpSession session){
 
         int pageSize=5;
         int last=page*pageSize;
@@ -114,7 +128,9 @@ public class CustomerController {
             last=customerList.size();
         List<Customer> customers=customerList.subList((page-1)*pageSize,last);
 
-        ModelAndView listModel=new ModelAndView("customer_management/CustomerList").addObject("page",page);
+        ModelAndView listModel=new ModelAndView("customer_management/CustomerList")
+                .addObject("page",page)
+                .addObject("username", session.getAttribute("user"));
 
         listModel.addObject("customers",customers);
 

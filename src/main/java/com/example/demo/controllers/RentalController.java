@@ -9,6 +9,7 @@ import com.example.demo.formModels.RentalObject;
 import com.example.demo.repositories.CustomerRepository;
 import com.example.demo.repositories.MovieRepository;
 import com.example.demo.repositories.RentalRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.Period;
@@ -37,36 +39,39 @@ public class RentalController {
     @Autowired
     private CustomerRepository customerRepository;
 
+    ModelMapper mapper=new ModelMapper();
+
     @RequestMapping("rentalPage")
-    public ModelAndView rentalPage(){
-        return new ModelAndView("rental_management/RentalPage");
+    public ModelAndView rentalPage(HttpSession session){
+        return new ModelAndView("rental_management/RentalPage").addObject("username", session.getAttribute("user"));
     }
 
     @RequestMapping("renting")
-    public ModelAndView rentAMovie(Model model){
+    public ModelAndView rentAMovie(Model model, HttpSession session){
         model.addAttribute("rentalIdForm",new RentalIdForm());
-        return new ModelAndView("rental_management/RentAMovie").addObject("rentalIdForm");
+        return new ModelAndView("rental_management/RentAMovie")
+                .addObject("rentalIdForm").addObject("username", session.getAttribute("user"));
     }
 
     @RequestMapping("rent")
-    public ModelAndView rent(Model model, @ModelAttribute @Valid RentalIdForm rentalIdForm, BindingResult bindingResult){
+    public ModelAndView rent(Model model, @ModelAttribute @Valid RentalIdForm rentalIdForm,
+                             BindingResult bindingResult, HttpSession session){
 
         if(bindingResult.hasErrors()){
             model.addAttribute("rentalIdForm",rentalIdForm);
-            return new ModelAndView("rental_management/RentAMovie").addObject("rentalIdForm");
+            return new ModelAndView("rental_management/RentAMovie")
+                    .addObject("rentalIdForm").addObject("username", session.getAttribute("user"));
         }
-        RentalId rentalId=new RentalId();
 
-        rentalId.setSocialSecurityNumber(rentalIdForm.getSocialSecurityNumber());
-        rentalId.setRentalDate(rentalIdForm.getRentalDate());
-
+        RentalId rentalId;
         Movie movie=movieRepository.findById(rentalIdForm.getMovieId()).get();
         if(movie.getAvailable())
-            rentalId.setMovieId(rentalIdForm.getMovieId());
+             rentalId=mapper.map(rentalIdForm, RentalId.class);
         else{
             model.addAttribute("rentalIdForm",new RentalIdForm());
             return new ModelAndView("rental_management/RentAMovie").addObject("rentalIdForm")
-                    .addObject("message", "Movie not available. Please choose another one.");
+                    .addObject("message", "Movie not available. Please choose another one.")
+                    .addObject("username", session.getAttribute("user"));
         }
         List<Rental> rentalList=(List<Rental>) rentalRepository.findAll();
         List<Rental> custRentals=rentalList.stream()
@@ -80,7 +85,8 @@ public class RentalController {
         {
             model.addAttribute("rentalIdForm",new RentalIdForm());
             return new ModelAndView("rental_management/RentAMovie").addObject("rentalIdForm")
-                    .addObject("message", "You have already rented a copy of this movie.");
+                    .addObject("message", "You have already rented a copy of this movie.")
+                    .addObject("username", session.getAttribute("user"));
         }
 
         movie.setAvailable(false);
@@ -88,12 +94,13 @@ public class RentalController {
         Rental rental= new Rental(movie, customer, rentalId);
 
         rentalRepository.save(rental);
-        return new ModelAndView("rental_management/RentAgain").addObject("rentalId",rentalId);
+        return new ModelAndView("rental_management/RentAgain")
+                .addObject("rentalId",rentalId).addObject("username", session.getAttribute("user"));
 
     }
 
     @RequestMapping("notReturned")
-    public ModelAndView notReturned(@RequestParam(defaultValue = "1") int page){
+    public ModelAndView notReturned(@RequestParam(defaultValue = "1") int page, HttpSession session){
         List<Rental> rentalList=(List<Rental>) rentalRepository.findAll();
         List<RentalObject> notReturnedMovies=new ArrayList<>();
 
@@ -107,11 +114,11 @@ public class RentalController {
             notReturnedMovies.add(rentalObject);
 
         }
-        return pagedViewRental(page,notReturnedMovies, "Not returned movies", "notReturned");
+        return pagedViewRental(page,notReturnedMovies, "Not returned movies", "notReturned", session);
     }
 
     @RequestMapping("overdueMovies")
-    public ModelAndView overdueMovies(@RequestParam(defaultValue = "1") int page){
+    public ModelAndView overdueMovies(@RequestParam(defaultValue = "1") int page, HttpSession session){
 
         List<Rental> rentalList=(List<Rental>) rentalRepository.findAll();
         List<RentalId> overdueRentals=new ArrayList<>();
@@ -133,10 +140,11 @@ public class RentalController {
             overdues.add(rentalObject);
         }
 
-        return pagedViewRental(page, overdues, "Overdue movies", "overdueMovies");
+        return pagedViewRental(page, overdues, "Overdue movies", "overdueMovies", session);
     }
 
-    public ModelAndView pagedViewRental(int page, List<RentalObject> rentalObjects, String title, String listCategory){
+    public ModelAndView pagedViewRental(int page, List<RentalObject> rentalObjects, String title,
+                                        String listCategory, HttpSession session){
 
         int pageSize=5;
         int last=page*pageSize;
@@ -149,7 +157,8 @@ public class RentalController {
         List<RentalObject> rentals=rentalObjects.subList((page-1)*pageSize,last);
 
         ModelAndView listModel=new ModelAndView("rental_management/RentalList").addObject("page",page);
-        listModel.addObject("rentals",rentals).addObject("title", title);
+        listModel.addObject("rentals",rentals).addObject("title", title)
+                .addObject("username", session.getAttribute("user"));
 
         if(page>1) {
             listModel.addObject("previous", listCategory+"?page=" + (page - 1));

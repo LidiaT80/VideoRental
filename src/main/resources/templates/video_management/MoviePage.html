@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Movie</title>
 </head>
 <body>
+    <h3 th:text="'Logged in as ' + ${username} "></h3>
     <form action="movieData" method="post">
         <input type="submit" value="Add a movie"/>
     </form>

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,12 +37,13 @@ public class ReturnController {
 
 
     @RequestMapping("movieReturn")
-    public ModelAndView movieReturn(){
-        return new ModelAndView("rental_management/ReturnMovies");
+    public ModelAndView movieReturn(HttpSession session){
+        return new ModelAndView("rental_management/ReturnMovies").addObject("username", session.getAttribute("user"));
     }
 
     @RequestMapping("findRentedMovies")
-    public ModelAndView findRentedMovies( @RequestParam String socialSecurityNumber, @RequestParam Date returnDate){
+    public ModelAndView findRentedMovies( @RequestParam String socialSecurityNumber, @RequestParam Date returnDate,
+                                          HttpSession session){
         ReturnId returnId=new ReturnId();
         ReturnedMovie returnedMovie=new ReturnedMovie();
         Customer customer=customerRepository.findById(socialSecurityNumber).get();
@@ -68,11 +70,13 @@ public class ReturnController {
 
         return new ModelAndView("rental_management/ReturnMovies")
                 .addObject("movies",custMovies )
-                .addObject("message", "Movies are returned!");
+                .addObject("message", "Movies are returned!")
+                .addObject("username", session.getAttribute("user"));
     }
 
     @RequestMapping("customerHistory")
-    public ModelAndView customerHistory(@RequestParam String socialSecurityNumber, @RequestParam(defaultValue = "1") int page){
+    public ModelAndView customerHistory(@RequestParam String socialSecurityNumber, @RequestParam(defaultValue = "1") int page,
+                                        HttpSession session){
         MovieController movieController=new MovieController();
         List<ReturnedMovie> returnedMovies=(List<ReturnedMovie>) returnRepository.findAll();
         List<Movie> custMovies=new ArrayList<>();
@@ -81,7 +85,7 @@ public class ReturnController {
                 .filter(returnedMovie -> returnedMovie.getReturnId().getSocialSecurityNumber().equals(socialSecurityNumber))
                 .forEach(returnedMovie->custMovies.add(returnedMovie.getMovie()));
 
-        return movieController.pagedView(page, custMovies, "Customers movies", "customerHistory");
+        return movieController.pagedView(page, custMovies, "Customers movies", "customerHistory", session);
     }
 
 

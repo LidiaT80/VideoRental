@@ -5,6 +5,7 @@
     <title>Delete</title>
 </head>
 <body>
+    <h3 th:text="'Logged in as ' + ${username} "></h3>
     <h1>Enter movieId:</h1>
     <form action="deleteById" method="post">
         <input type="text" name="movieId"/>

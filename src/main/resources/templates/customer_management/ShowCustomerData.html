@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>CustomerData</title>
+    <link rel="stylesheet" href="../../Style.css">
 </head>
 <body>
+    <h3 th:text="'Logged in as ' + ${username} "></h3>
 
-        <p th:text="'Name: '+${customer.name}"></p>
-        <p th:text="'Address: '+${customer.address}"></p>
-        <p th:text="'Postal code: '+${customer.postalCode}"></p>
-        <p th:text="'City: '+${customer.city}"></p>
-        <p th:text="'Country: '+${customer.country}"></p>
-        <p th:text="'Email: '+${customer.email}"></p>
-        <p th:text="'Phone: '+${customer.phone}"></p>
-        <p th:text="'Social security number: '+${customer.socialSecurityNumber}"></p>
+    <p th:text="'Name: '+${customer.name}"></p>
+    <p th:text="'Address: '+${customer.address}"></p>
+    <p th:text="'Postal code: '+${customer.postalCode}"></p>
+    <p th:text="'City: '+${customer.city}"></p>
+    <p th:text="'Country: '+${customer.country}"></p>
+    <p th:text="'Email: '+${customer.email}"></p>
+    <p th:text="'Phone: '+${customer.phone}"></p>
+    <p th:text="'Social security number: '+${customer.socialSecurityNumber}"></p>
 
-        <form action="goBack" method="post">
-            <input type="submit" value="Go back to start"/>
-        </form>
+    <form action="goBack" method="post">
+        <input type="submit" value="Go back to start"/>
+    </form>
 
 
 </body>
