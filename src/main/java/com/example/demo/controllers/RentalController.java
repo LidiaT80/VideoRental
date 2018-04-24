@@ -93,7 +93,7 @@ public class RentalController {
         Rental rental= new Rental(movie, customer, rentalId);
 
         rentalRepository.save(rental);
-        return new ModelAndView("rental_management/RentAgain")
+        return new ModelAndView("rental_management/Rented")
                 .addObject("rentalId",rentalId).addObject("username", session.getAttribute("user"));
 
     }

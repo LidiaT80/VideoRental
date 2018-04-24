@@ -51,8 +51,11 @@
                         Renting options
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" th:href="@{/movie/rent}">Rent</a>
-                        <a class="dropdown-item" th:href="@{/movie/return}">Return</a>
+                        <a class="dropdown-item" th:href="@{/renting}">Rent</a>
+                        <a class="dropdown-item" th:href="@{/movieReturn}">Return</a>
+                        <a class="dropdown-item" th:href="@{/notReturned}">Show Rented Movies</a>
+                        <a class="dropdown-item" th:href="@{/overdueMovies}">Show Overdue Movies</a>
+                        <a class="dropdown-item" th:href="@{/rentalPage}">Show Customers Movies</a>
                     </div>
             </ul>
 
@@ -65,27 +68,13 @@
 </header>
 
 
-    <form action="renting" method="post">
-        <input type="submit" value="MovieRenting"/>
-    </form>
-    <form action="movieReturn" method="post">
-        <input type="submit" value="MovieReturn"/>
-    </form>
-
-    <form action="availableMovies" method="post">
-        <input type="submit" value="Show available movies"/>
-    </form>
-    <form action="notReturned" method="post">
-        <input type="submit" value="Show movies that are not returned"/>
-    </form>
-    <form action="overdueMovies" method="post">
-        <input type="submit" value="Show overdue movies"/>
-    </form>
+    <p>Find Customers Current movies</p>
     <form action="customersCurrentMovies" method="post">
         <p>Enter customers social security number</p>
         <input type="text" name="socialSecurityNumber"/>
         <input type="submit" value="Show customers current movies"/>
     </form>
+    <p>Show Customers Renting History</p>
     <form action="customerHistory" method="post">
         <p>Enter customers social security number</p>
         <input type="text" name="socialSecurityNumber"/>
