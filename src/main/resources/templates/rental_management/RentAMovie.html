@@ -67,27 +67,39 @@
     </nav>
 </header>
 
+<div class="jumbotron">
     <p th:text="${message}"></p>
     <form action="rent" method="post" th:object="${rentalIdForm}">
-        <div class="form-group">
-            <label>Social security number</label>
-            <input type="text" name="socialSecurityNumber" class="form-control" th:field="*{socialSecurityNumber}" placeholder="Social security number"/>
-            <small class="form-text text-muted" th:if="${#fields.hasErrors('socialSecurityNumber')}" th:errors="*{socialSecurityNumber}"></small>
+        <div class="form-group row">
+            <div class="col-auto">
+                <div class="form-group">
+                    <label>Social security number</label>
+                    <input type="text" name="socialSecurityNumber" class="form-control"
+                           th:field="*{socialSecurityNumber}" placeholder="Social security number"/>
+                    <small class="form-text text-muted" th:if="${#fields.hasErrors('socialSecurityNumber')}"
+                           th:errors="*{socialSecurityNumber}"></small>
+                </div>
+                <div class="form-group">
+                    <label>Enter movieId</label>
+                    <input type="text" name="movieId" class="form-control" th:field="*{movieId}"
+                           placeholder="Movie Id"/>
+                    <small class="form-text text-muted" th:if="${#fields.hasErrors('movieId')}"
+                           th:errors="*{movieId}"></small>
+                </div>
+                <div class="form-group">
+                    <label>Enter date:</label>
+                    <input type="text" name="rentalDate" class="form-control" th:field="*{rentalDate}"
+                           placeholder="Date"/>
+                    <small class="form-text text-muted" th:if="${#fields.hasErrors('rentalDate')}"
+                           th:errors="*{rentalDate}"></small>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
         </div>
-        <div class="form-group">
-            <label>Enter movieId</label>
-            <input type="text" name="movieId" class="form-control" th:field="*{movieId}" placeholder="Movie Id"/>
-            <small class="form-text text-muted" th:if="${#fields.hasErrors('movieId')}" th:errors="*{movieId}"></small>
-        </div>
-        <div class="form-group">
-            <label>Enter date:</label>
-            <input type="text" name="rentalDate" class="form-control" th:field="*{rentalDate}" placeholder="Date"/>
-            <small class="form-text text-muted" th:if="${#fields.hasErrors('rentalDate')}" th:errors="*{rentalDate}"></small>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+</div>
 
-
+    
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
