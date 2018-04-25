@@ -109,6 +109,20 @@ public class CustomerController {
                 .addObject("username", session.getAttribute("user"));
     }
 
+    @RequestMapping("findCustomer")
+    public ModelAndView findCustomer(HttpSession session){
+        return new ModelAndView("customer_management/FindCustomer")
+                .addObject("username", session.getAttribute("user"));
+    }
+
+    @RequestMapping("findById")
+    public ModelAndView findById(@RequestParam String socialSecurityNumber, HttpSession session){
+        Customer customer=customerRepository.findById(socialSecurityNumber).get();
+        return new ModelAndView("customer_management/ShowCustomerData")
+                .addObject("customer", customer)
+                .addObject("username", session.getAttribute("user"));
+    }
+
     @RequestMapping("showList")
     public ModelAndView showList(@RequestParam (defaultValue = "1") int page, HttpSession session){
 
