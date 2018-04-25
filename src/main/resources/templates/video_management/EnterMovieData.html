@@ -28,7 +28,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" th:href="@{/showList}">Show All</a>
-                        <a class="dropdown-item" th:href="@{/findCustomer}">Find Customer</a>
+                        <a class="dropdown-item" th:href="@{/customerData}">Find Customer</a>
                         <a class="dropdown-item" th:href="@{/customerData}">Add Customer</a>
                         <a class="dropdown-item" th:href="@{/editData}">Edit Customer</a>
                     </div>
@@ -67,35 +67,50 @@
     </nav>
 </header>
 
+<div class="jumbotron">
     <h1>Enter movie data:</h1>
     <form action="addMovie" method="post" th:object="${movieDataForm}">
-        <div class="form-group">
-            <label>Name</label>
-            <input type="text" name="name" class="form-control" th:field="*{name}" placeholder="Name"/>
-            <small class="form-text text-muted" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
+        <div class="form-group row">
+            <div class="col-auto">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" name="name" class="form-control" th:field="*{name}" placeholder="Name"/>
+                    <small class="form-text text-muted" th:if="${#fields.hasErrors('name')}"
+                           th:errors="*{name}"></small>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control" placeholder="Enter Description" id="exampleTextarea" rows="3" th:field="*{description}"
+                              placeholder="Description"></textarea>
+                    <small class="form-text text-muted" th:if="${#fields.hasErrors('description')}"
+                           th:errors="*{description}"></small>
+                </div>
+                <div class="form-group">
+                    <label>Release date</label>
+                    <input type="text" name="releaseDate" class="form-control" th:field="*{releaseDate}"
+                           placeholder="Release date"/>
+                    <small class="form-text text-muted" th:if="${#fields.hasErrors('releaseDate')}"
+                           th:errors="*{releaseDate}"></small>
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <input type="text" name="category" class="form-control" th:field="*{category}"
+                           placeholder="Category"/>
+                    <small class="form-text text-muted" th:if="${#fields.hasErrors('category')}"
+                           th:errors="*{category}"></small>
+                </div>
+                <div class="form-group">
+                    <label>Format</label>
+                    <input type="text" name="movieFormat" class="form-control" th:field="*{movieFormat}"
+                           placeholder="Format"/>
+                    <small class="form-text text-muted" th:if="${#fields.hasErrors('movieFormat')}"
+                           th:errors="*{movieFormat}"></small>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
         </div>
-        <div class="form-group">
-            <label>Description</label>
-            <input type="text" name="description" class="form-control" th:field="*{description}" placeholder="Description"/>
-            <small class="form-text text-muted" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></small>
-        </div>
-        <div class="form-group">
-            <label>Release date</label>
-            <input type="text" name="releaseDate" class="form-control" th:field="*{releaseDate}" placeholder="Release date"/>
-            <small class="form-text text-muted" th:if="${#fields.hasErrors('releaseDate')}" th:errors="*{releaseDate}"></small>
-        </div>
-        <div class="form-group">
-            <label>Category</label>
-            <input type="text" name="category" class="form-control" th:field="*{category}" placeholder="Category"/>
-            <small class="form-text text-muted" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></small>
-        </div>
-        <div class="form-group">
-            <label>Format</label>
-            <input type="text" name="movieFormat" class="form-control" th:field="*{movieFormat}" placeholder="Format"/>
-            <small class="form-text text-muted" th:if="${#fields.hasErrors('movieFormat')}" th:errors="*{movieFormat}"></small>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+</div>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -109,4 +124,4 @@
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
 </body>
-  </html>
+</html>
