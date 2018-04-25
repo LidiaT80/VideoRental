@@ -66,24 +66,37 @@
         </div>
     </nav>
 </header>
-
-
+<div class="jumbotron">
     <p>Find Customers Current movies</p>
     <form action="customersCurrentMovies" method="post">
-        <div class="form-group">
-            <label>Enter customers social security number</label>
-            <input type="text" name="socialSecurityNumber" class="form-control" placeholder="Social security number"/>
+        <div class="form-group row">
+            <div class="col-auto">
+                <div class="form-group">
+                    <label>Enter customers social security number</label>
+                    <input type="text" name="socialSecurityNumber" class="form-control"
+                           placeholder="Social security number"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Show customers current movies</button>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Show customers current movies</button>
     </form>
     <p>Show Customers Renting History</p>
     <form action="customerHistory" method="post">
-        <div class="form-group">
-            <label>Enter customers social security number</label>
-            <input type="text" name="socialSecurityNumber" class="form-control" placeholder="Social security number"/>
+        <div class="form-group row">
+            <div class="col-auto">
+                <div class="form-group">
+                    <label>Enter customers social security number</label>
+                    <input type="text" name="socialSecurityNumber" class="form-control"
+                           placeholder="Social security number"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Show history</button>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Show history</button>
     </form>
+</div>
+
+
+
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
