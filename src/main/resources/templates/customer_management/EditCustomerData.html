@@ -66,6 +66,8 @@
         </div>
     </nav>
 </header>
+
+
 <div class="jumbotron">
     <h3>Edit customer data</h3>
     <form action="editCustomer" method="post">
@@ -77,8 +79,16 @@
                            placeholder="Social security number"/>
                 </div>
                 <div class="form-group">
-                    <label>Type the name of a property: (name, address, postalCode, city, country, phone, email)</label>
-                    <input type="text" name="property" class="form-control" placeholder="Property"/>
+                    <label for="exampleSelect1">Property:</label>
+                    <select class="form-control"  name="property" id="exampleSelect1">
+                        <option value="name">Name</option>
+                        <option  value="address">Address</option>
+                        <option  value="postalCode">Postal Code</option>
+                        <option  value="city">City</option>
+                        <option  value="country">Country</option>
+                        <option  value="phone">Phone</option>
+                        <option  value="email">Email</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label>Enter new value:</label>
