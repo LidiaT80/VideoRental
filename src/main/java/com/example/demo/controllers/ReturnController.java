@@ -62,6 +62,11 @@ public class ReturnController {
                                    returnedMovie.setReturnDate(new Date());
                                    returnedMovie.setReturnId(returnId);
                                    returnRepository.save(returnedMovie); });
+        if(custMovies.size()==0)
+            return new ModelAndView("rental_management/ReturnMovies")
+
+                    .addObject("message", "Nothing to return!")
+                    .addObject("username", session.getAttribute("user"));
 
 
         rentedMovies.stream()

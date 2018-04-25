@@ -63,7 +63,15 @@ public class RentalController {
         }
 
         RentalId rentalId;
+        if(!movieRepository.findById(rentalIdForm.getMovieId()).isPresent())
+        {
+            model.addAttribute("rentalIdForm",new RentalIdForm());
+            return new ModelAndView("rental_management/RentAMovie").addObject("rentalIdForm")
+                    .addObject("message", "Movie not found. Please choose another one.")
+                    .addObject("username", session.getAttribute("user"));
+        }
         Movie movie=movieRepository.findById(rentalIdForm.getMovieId()).get();
+
         if(movie.getAvailable())
              rentalId=mapper.map(rentalIdForm, RentalId.class);
         else{
