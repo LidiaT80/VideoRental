@@ -67,22 +67,31 @@
     </nav>
 </header>
 
-    <h1>Return movies</h1>
-
     <form action="findRentedMovies" method="post">
-        <p>Enter customers social security number:</p>
-        <input type="text" name="socialSecurityNumber"/>
-        <input type="submit" value="Enter"/>
+        <div class="form-group">
+            <label>Enter customers social security number:</label>
+            <input type="text" name="socialSecurityNumber" class="form-control" placeholder="Social security number"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-
-    <th:block th:each="movie:${movies}">
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <td scope="col">Movie Id</td>
+        <td scope="col">Name</td>
+    </tr>
+    </thead>
+    <tbody th:block th:each="movie:${movies}">
         <tr>
             <td th:text="${movie.movieId}"></td>
             <td th:text="${movie.name}"></td>
-        </tr><br/>
-    </th:block>
-    <p th:text="${date}"></p>
-    <p th:text="${message}"></p>
+        </tr>
+    </tbody>
+</table>
+<ul class="list-group">
+    <li class="list-group-item" th:text="${date}">Date</li>
+    <li class="list-group-item" th:text="${message}">Message</li>
+</ul>
 
 
 <!-- Optional JavaScript -->

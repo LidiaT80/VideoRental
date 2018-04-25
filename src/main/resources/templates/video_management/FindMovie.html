@@ -68,15 +68,19 @@
 </header>
 <p>Search by name</p>
 <form action="findByName" method="post">
-    <p>Enter name:</p>
-    <input type="text" name="movieName"/>
-    <input type="submit" value="Search"/>
+    <div class="form-group">
+        <label>Enter name:</label>
+        <input type="text" name="movieName" class="form-control" placeholder="Name"/>
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
 </form>
 <p>Search by category</p>
 <form action="findByCategory" method="post">
-    <p>Enter category:</p>
-    <input type="text" name="movieCategory"/>
-    <input type="submit" value="Search"/>
+    <div class="form-group">
+        <label>Enter category:</label>
+        <input type="text" name="movieCategory" class="form-control" placeholder="Category"/>
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
 </form>
 
 <!-- Optional JavaScript -->

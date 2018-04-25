@@ -70,15 +70,19 @@
 
     <p>Find Customers Current movies</p>
     <form action="customersCurrentMovies" method="post">
-        <p>Enter customers social security number</p>
-        <input type="text" name="socialSecurityNumber"/>
-        <input type="submit" value="Show customers current movies"/>
+        <div class="form-group">
+            <label>Enter customers social security number</label>
+            <input type="text" name="socialSecurityNumber" class="form-control" placeholder="Social security number"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Show customers current movies</button>
     </form>
     <p>Show Customers Renting History</p>
     <form action="customerHistory" method="post">
-        <p>Enter customers social security number</p>
-        <input type="text" name="socialSecurityNumber"/>
-        <input type="submit" value="Show history"/>
+        <div class="form-group">
+            <label>Enter customers social security number</label>
+            <input type="text" name="socialSecurityNumber" class="form-control" placeholder="Social security number"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Show history</button>
     </form>
 
 <!-- Optional JavaScript -->

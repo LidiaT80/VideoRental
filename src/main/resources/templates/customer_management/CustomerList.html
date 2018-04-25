@@ -97,10 +97,11 @@
     </tbody>
    </table>
 
-    <a th:text="${text1}" th:href="${previous}"></a>
-    <span th:text="' Page '+${page}+' '">page</span>
-    <a th:text="${text2}" th:href="${next}"></a>
-
+    <ul class="pagination justify-content-center fixed-bottom">
+        <li class="page-item" ><a class="page-link"  th:href="${previous}">previous</a></li>
+        <li class="page-item active"><span class="page-link" th:text="' Page '+${page}+' '">page</span></li>
+        <li class="page-item"><a class="page-link" th:href="${next}">next</a></li>
+    </ul>
 
 
     <!-- Optional JavaScript -->

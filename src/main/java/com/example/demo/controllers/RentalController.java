@@ -172,14 +172,12 @@ public class RentalController {
         listModel.addObject("rentals",rentals).addObject("title", title)
                 .addObject("username", session.getAttribute("user"));
 
-        if(page>1) {
+        if(page>1)
             listModel.addObject("previous", listCategory+"?page=" + (page - 1));
-            listModel.addObject("text1", "previous");
-        }
-        if(page<numberOfPages) {
+
+        if(page<numberOfPages)
             listModel.addObject("next", listCategory+"?page=" + (page + 1));
-            listModel.addObject("text2", "next");
-        }
+
         return listModel;
     }
 

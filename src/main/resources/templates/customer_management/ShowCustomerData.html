@@ -67,16 +67,19 @@
     </nav>
 </header>
 
+<h3>Added customer</h3>
 
+<ul class="list-group">
+    <li class="list-group-item" th:text="'Name: '+${customer.name}">Name</li>
+    <li class="list-group-item" th:text="'Address: '+${customer.address}">Address</li>
+    <li class="list-group-item" th:text="'Postal code: '+${customer.postalCode}">Postal code</li>
+    <li class="list-group-item" th:text="'City: '+${customer.city}">City</li>
+    <li class="list-group-item" th:text="'Country: '+${customer.country}">Country</li>
+    <li class="list-group-item" th:text="'Email: '+${customer.email}">Email</li>
+    <li class="list-group-item" th:text="'Phone: '+${customer.phone}">Phone</li>
+    <li class="list-group-item" th:text="'Social security number: '+${customer.socialSecurityNumber}">Social security number</li>
+</ul>
 
-    <p th:text="'Name: '+${customer.name}"></p>
-    <p th:text="'Address: '+${customer.address}"></p>
-    <p th:text="'Postal code: '+${customer.postalCode}"></p>
-    <p th:text="'City: '+${customer.city}"></p>
-    <p th:text="'Country: '+${customer.country}"></p>
-    <p th:text="'Email: '+${customer.email}"></p>
-    <p th:text="'Phone: '+${customer.phone}"></p>
-    <p th:text="'Social security number: '+${customer.socialSecurityNumber}"></p>
 
 
     <!-- Optional JavaScript -->

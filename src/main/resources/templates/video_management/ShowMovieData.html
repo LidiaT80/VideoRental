@@ -68,15 +68,15 @@
     </nav>
 </header>
 
-
-    <p th:text="'MovieId: '+${movie.movieId}"></p>
-    <p th:text="'Name: '+${movie.name}"></p>
-    <p th:text="'Description: '+${movie.description}"></p>
-    <p th:text="'Release date: '+${movie.releaseDate}"></p>
-    <p th:text="'Category: '+${movie.category}"></p>
-    <p th:text="'Format: '+${movie.movieFormat}"></p>
-    <p th:text="'Available: '+${movie.available}"></p>
-
+<ul class="list-group">
+    <li class="list-group-item" th:text="'MovieId: '+${movie.movieId}">Movie Id</li>
+    <li class="list-group-item" th:text="'Name: '+${movie.name}">Name</li>
+    <li class="list-group-item" th:text="'Description: '+${movie.description}">Description</li>
+    <li class="list-group-item" th:text="'Release date: '+${movie.releaseDate}">Release date</li>
+    <li class="list-group-item" th:text="'Category: '+${movie.category}">Category</li>
+    <li class="list-group-item" th:text="'Format: '+${movie.movieFormat}">Format</li>
+    <li class="list-group-item" th:text="'Available: '+${movie.available}">Available</li>
+</ul>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

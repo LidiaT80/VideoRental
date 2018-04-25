@@ -66,17 +66,21 @@
         </div>
     </nav>
 </header>
-
-
-    <h1>Edit</h1>
+    <h3>Edit customer data</h3>
     <form action="editCustomer" method="post">
-        <p>Enter customers social security number:</p>
-        <input type="text" name="socialSecurityNumber"/>
-        <p>Type the name of a property: (name, address, postalCode, city, country, phone, email)</p>
-        <input type="text" name="property"/>
-        <p>Enter new value:</p>
-        <input type="text" name="newValue"/><br/>
-        <input type="submit" value="Enter"/>
+        <div class="form-group">
+            <label>Enter customers social security number:</label>
+            <input type="text" name="socialSecurityNumber" class="form-control" placeholder="Social security number"/>
+        </div>
+        <div class="form-group">
+            <label>Type the name of a property: (name, address, postalCode, city, country, phone, email)</label>
+            <input type="text" name="property" class="form-control" placeholder="Property"/>
+        </div>
+        <div class="form-group">
+            <label>Enter new value:</label>
+            <input type="text" name="newValue" class="form-control" placeholder="New value"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
     <!-- Optional JavaScript -->

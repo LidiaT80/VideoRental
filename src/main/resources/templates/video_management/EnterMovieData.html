@@ -69,17 +69,32 @@
 
     <h1>Enter movie data:</h1>
     <form action="addMovie" method="post" th:object="${movieDataForm}">
-        <p>Name:<input type="text" name="name" th:field="*{name}"/></p>
-        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
-        <p>Description:<input type="text" name="description" th:field="*{description}"/></p>
-        <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
-        <p>Release date:<input type="text" name="releaseDate" th:field="*{releaseDate}"/></p>
-        <p th:if="${#fields.hasErrors('releaseDate')}" th:errors="*{releaseDate}"></p>
-        <p>Category:<input type="text" name="category" th:field="*{category}"/></p>
-        <p th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></p>
-        <p>Format:<input type="text" name="movieFormat" th:field="*{movieFormat}"/></p>
-        <p th:if="${#fields.hasErrors('movieFormat')}" th:errors="*{movieFormat}"></p>
-        <input type="submit" value="Enter"/>
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" name="name" class="form-control" th:field="*{name}" placeholder="Name"/>
+            <small class="form-text text-muted" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <input type="text" name="description" class="form-control" th:field="*{description}" placeholder="Description"/>
+            <small class="form-text text-muted" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></small>
+        </div>
+        <div class="form-group">
+            <label>Release date</label>
+            <input type="text" name="releaseDate" class="form-control" th:field="*{releaseDate}" placeholder="Release date"/>
+            <small class="form-text text-muted" th:if="${#fields.hasErrors('releaseDate')}" th:errors="*{releaseDate}"></small>
+        </div>
+        <div class="form-group">
+            <label>Category</label>
+            <input type="text" name="category" class="form-control" th:field="*{category}" placeholder="Category"/>
+            <small class="form-text text-muted" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></small>
+        </div>
+        <div class="form-group">
+            <label>Format</label>
+            <input type="text" name="movieFormat" class="form-control" th:field="*{movieFormat}" placeholder="Format"/>
+            <small class="form-text text-muted" th:if="${#fields.hasErrors('movieFormat')}" th:errors="*{movieFormat}"></small>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
 <!-- Optional JavaScript -->

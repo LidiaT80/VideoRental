@@ -67,12 +67,13 @@
     </nav>
 </header>
 
+<ul class="list-group">
+    <li class="list-group-item">Rented!</li>
+    <li class="list-group-item" th:text="'Customer: '+${rentalId.socialSecurityNumber}">Social security number</li>
+    <li class="list-group-item" th:text="'Movie: '+${rentalId.movieId}">Movie Id</li>
+    <li class="list-group-item" th:text="'Rental date: '+${rentalId.rentalDate}">Rental date</li>
 
-    <p th:text="'Customer: '+${rentalId.socialSecurityNumber}"></p>
-    <p th:text="'Movie: '+${rentalId.movieId}"></p>
-    <p th:text="'Rental date: '+${rentalId.rentalDate}"></p>
-
-    <p>Rented!</p>
+</ul>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

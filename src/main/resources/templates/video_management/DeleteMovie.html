@@ -67,10 +67,13 @@
     </nav>
 </header>
 
-    <h1>Enter movieId:</h1>
+
     <form action="deleteById" method="post">
-        <input type="text" name="movieId"/>
-        <input type="submit" value="Delete"/>
+        <div class="form-group">
+            <label>Movie Id</label>
+            <input type="text" name="movieId" class="form-control" placeholder="Movie Id"/>
+        </div>
+            <button type="submit" class="btn btn-primary">Delete</button>
     </form>
 
     <!-- Optional JavaScript -->

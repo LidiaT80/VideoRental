@@ -128,15 +128,11 @@ public class CustomerController {
 
         listModel.addObject("customers",customers);
 
-        if(page>1) {
+        if(page>1)
             listModel.addObject("previous", "showList?page=" + (page - 1));
-            listModel.addObject("text1", "previous");
-        }
 
-        if(page<numberOfPages) {
+        if(page<numberOfPages)
             listModel.addObject("next", "showList?page=" + (page + 1));
-            listModel.addObject("text2", "next");
-        }
 
         return listModel;
 
