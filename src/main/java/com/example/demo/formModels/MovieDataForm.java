@@ -2,6 +2,7 @@ package com.example.demo.formModels;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class MovieDataForm {
@@ -14,7 +15,7 @@ public class MovieDataForm {
     @NotEmpty
     @Size(min = 5, max = 250)
     private String description;
-
+    @Pattern(regexp = "[0-9]{4}", message = "Must Match XXXX. Example 1967")
     private String releaseDate;
     @NotNull
     @NotEmpty

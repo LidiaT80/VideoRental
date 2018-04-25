@@ -1,9 +1,6 @@
 package com.example.demo.formModels;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 public class CustomerDataForm {
 
@@ -13,11 +10,9 @@ public class CustomerDataForm {
     private String name;
     @NotNull
     @NotEmpty
-    @Size(min = 3, max = 30)
+    @Size(min = 1, max = 30)
     private String address;
-    @NotNull
-    @NotEmpty
-    @Size(min = 5,max = 6)
+    @Pattern(regexp = "^[0-9]{5,6}", message="Must Match 5 to 6 digits. Example 21619 or 216110")
     private String postalCode;
     @NotNull
     @NotEmpty
@@ -27,17 +22,13 @@ public class CustomerDataForm {
     @NotEmpty
     @Size(min = 2, max = 30)
     private String country;
-    @NotNull
-    @NotEmpty
-    @Size(min = 9, max = 12)
+    @Pattern(regexp = "^[0-9]{3,4}-[0-9]{6}", message="Must Match 3 digits - 6 digits. Example 040-152313")
     private String phone;
     @NotNull
     @NotEmpty
     @Email
     private String email;
-    @NotNull
-    @NotEmpty
-    @Size(min = 10, max = 13)
+    @Pattern(regexp = "^[0-9]{10}" , message="Must Match 10 digits. Example 6506121623")
     private String socialSecurityNumber;
 
 
