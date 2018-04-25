@@ -66,15 +66,20 @@
         </div>
     </nav>
 </header>
-
-
+<div class="jumbotron">
     <form action="deleteById" method="post">
-        <div class="form-group">
-            <label>Movie Id</label>
-            <input type="text" name="movieId" class="form-control" placeholder="Movie Id"/>
+        <div class="form-group row">
+            <div class="col-auto">
+                <div class="form-group">
+                    <label>Movie Id</label>
+                    <input type="text" name="movieId" class="form-control" placeholder="Movie Id"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Delete</button>
+            </div>
         </div>
-            <button type="submit" class="btn btn-primary">Delete</button>
     </form>
+</div>
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
